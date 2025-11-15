@@ -17,23 +17,35 @@ import ManageCoursesAdmin from "./pages/admin/ManageCourses";
 import ManageCompanies from "./pages/admin/ManageCompanies";
 import Reports from "./pages/admin/Reports";
 
+import MonitorUsers from "./pages/admin/MonitorUsers";           // ✅ New page
+
+import PublishAdmissionsInstitute from "./pages/institute/PublishAdmissions";
+import PublishAdmissionsAdmin from "./pages/admin/PublishAdmissions";
+
 // Institute
 import InstituteDashboard from "./pages/institute/InstituteDashboard";
 import InstituteProfile from "./pages/institute/InstituteProfile";
 import ManageFaculties from "./pages/institute/ManageFaculties";
 import ManageCourses from "./pages/institute/ManageCourses";
 import StudentApplications from "./pages/institute/StudentApplications";
+import ManageStudentStatus from "./pages/institute/ManageStudentStatus";
 
-// Student
+
+// Student pages
 import StudentDashboard from "./pages/student/StudentDashboard";
-import ApplyCourse from "./pages/student/ApplyCourse";
-import ViewAdmissions from "./pages/student/ViewAdmissions";
-import JobApplications from "./pages/student/JobApplications";
+import ApplyForCourse from "./pages/student/ApplyForCourse";
+import AdmissionsResults from "./pages/student/AdmissionsResults";
+import JobPostings from "./pages/student/JobPostings";
+import Profile from "./pages/student/Profile";
+import Transcripts from "./pages/student/Transcripts";
 
 // Company
 import CompanyDashboard from "./pages/company/CompanyDashboard";
 import PostJob from "./pages/company/PostJob";
 import ViewApplicants from "./pages/company/ViewApplicants";
+import CompanyProfile from "./pages/company/CompanyProfile";      // ✅ NEW
+import CompanySettings from "./pages/company/CompanySettings";    // ✅ NEW
+
 
 export default function RoutesConfig() {
   return (
@@ -53,6 +65,9 @@ export default function RoutesConfig() {
         <Route path="/admin/courses" element={<ManageCoursesAdmin />} />
         <Route path="/admin/companies" element={<ManageCompanies />} />
         <Route path="/admin/reports" element={<Reports />} />
+        <Route path="/admin/admissions" element={<PublishAdmissionsAdmin />} />
+        <Route path="/admin/users" element={<MonitorUsers />} />
+
       </Route>
 
       {/* Institute Routes */}
@@ -62,21 +77,30 @@ export default function RoutesConfig() {
         <Route path="/institute/faculties" element={<ManageFaculties />} />
         <Route path="/institute/courses" element={<ManageCourses />} />
         <Route path="/institute/applications" element={<StudentApplications />} />
+        <Route path="/institute/admissions" element={<PublishAdmissionsInstitute />} />
+        <Route path="/institute/student-status" element={<ManageStudentStatus />} />
+
       </Route>
 
       {/* Student Routes */}
       <Route element={<ProtectedRoute role="student" />}>
-        <Route path="/student" element={<StudentDashboard />} />
-        <Route path="/student/apply" element={<ApplyCourse />} />
-        <Route path="/student/admissions" element={<ViewAdmissions />} />
-        <Route path="/student/jobs" element={<JobApplications />} />
-      </Route>
+      <Route path="/student" element={<Navigate to="/student/dashboard" />} />
+      <Route path="/student/dashboard" element={<StudentDashboard />} />
+      <Route path="/student/apply" element={<ApplyForCourse />} />
+      <Route path="/student/admissions" element={<AdmissionsResults />} />
+      <Route path="/student/jobs" element={<JobPostings />} />
+      <Route path="/student/profile" element={<Profile />} />
+      <Route path="/student/transcripts" element={<Transcripts />} />
+    </Route>
+
 
       {/* Company Routes */}
       <Route element={<ProtectedRoute role="company" />}>
         <Route path="/company" element={<CompanyDashboard />} />
         <Route path="/company/post-job" element={<PostJob />} />
         <Route path="/company/applicants" element={<ViewApplicants />} />
+        <Route path="/company/profile" element={<CompanyProfile />} />
+        <Route path="/company/settings" element={<CompanySettings />} />
       </Route>
 
       {/* 404 Fallback */}

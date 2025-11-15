@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom"; // ✅ import Link
 
 export default function InstituteDashboard() {
   const links = [
@@ -9,6 +10,8 @@ export default function InstituteDashboard() {
     { to: "/institute/faculties", label: "Faculties" },
     { to: "/institute/courses", label: "Courses" },
     { to: "/institute/applications", label: "Student Applications" },
+    { to: "/institute/admissions", label: "Publish Admissions" },
+    { to: "/institute/student-status", label: "Manage Student Status" },
   ];
 
   const { user } = useAuth();
@@ -41,7 +44,7 @@ export default function InstituteDashboard() {
               Welcome, {user?.name}!
             </h1>
             <p style={{ fontSize: "16px", color: "#4b5563" }}>
-              This is your Institute Dashboard. Use the sidebar to manage your profile, faculties, courses, and review student applications.
+              This is your Institute Dashboard. Use the sidebar or the cards below to manage your profile, faculties, courses, publish admissions, and review student applications.
             </p>
           </div>
 
@@ -53,9 +56,9 @@ export default function InstituteDashboard() {
             }}
           >
             {links.map((link) => (
-              <a
-                key={link.to}
-                href={link.to}
+              <Link
+                key={link.to} // ✅ use Link instead of <a>
+                to={link.to}
                 style={{
                   display: "block",
                   backgroundColor: "#4f46e5",
@@ -71,7 +74,7 @@ export default function InstituteDashboard() {
                 onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#4f46e5")}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
         </main>

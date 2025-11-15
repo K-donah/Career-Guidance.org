@@ -19,11 +19,12 @@ export default function Login() {
       return;
     }
     const role = res.user?.role;
-    if (role === "admin") nav("/admin");
-    else if (role === "institute") nav("/institute");
-    else if (role === "student") nav("/student");
-    else if (role === "company") nav("/company");
-    else nav("/");
+
+if (role === "admin") nav("/admin");
+else if (role === "institute") nav("/institute");
+else if (role === "student") nav("/student/dashboard");
+else if (role === "company") nav("/company");
+else nav("/");
   };
 
   return (
